@@ -1,0 +1,124 @@
+---
+alwaysApply: true
+---
+
+# Task Management Frontend - Cursor Rules
+
+## Technology Stack
+- **React 18+** with **TypeScript** for type safety
+- **Vite** as the build tool and dev server
+- Prefer functional components with hooks
+- Use modern React patterns (concurrent features, Suspense, etc.)
+
+## Vite-Specific Guidelines
+- Use Vite's environment variables: `import.meta.env.VITE_*`
+- Leverage Vite's fast HMR (Hot Module Replacement)
+- Use `@/` alias for src imports (configure in `vite.config.ts`)
+- Place static assets in `public/` directory
+- Use Vite plugins for optimization (e.g., vite-plugin-pwa for PWA support)
+
+## Code Style & Conventions
+- Use TypeScript strict mode
+- Follow ESLint and Prettier configurations
+- Use meaningful variable and function names
+- Prefer `const` over `let`, avoid `var`
+- Use arrow functions for component definitions
+- Keep components small and focused (single responsibility)
+- Use named exports for components
+
+## Component Structure
+- Organize components in `src/components/` directory
+- Use PascalCase for component files (e.g., `TaskCard.tsx`)
+- Each component should have its own file
+- Extract reusable logic into custom hooks (in `src/hooks/` directory)
+- Use index files for cleaner imports
+- Co-locate component styles (CSS modules or styled-components)
+
+## State Management
+- Use React Context API or Zustand for global state
+- Keep local state with `useState` when appropriate
+- Use `useReducer` for complex state logic
+- Consider TanStack Query (React Query) for server state management
+- Avoid prop drilling - use context or state management library
+
+## API Integration
+- Create a centralized API client (in `src/services/` or `src/api/` directory)
+- Use `fetch` or `axios` with async/await for API calls
+- Implement proper error handling and loading states
+- Use `import.meta.env.VITE_API_URL` for API endpoints
+- Implement request/response interceptors for authentication
+- Create typed API response interfaces
+
+## Task Management Specific
+- Tasks should have: `id`, `title`, `description`, `status`, `priority`, `dueDate`, `createdAt`, `updatedAt`
+- Implement CRUD operations for tasks
+- Support task filtering and sorting
+- Implement drag-and-drop for task reordering (if needed)
+- Add task status transitions (e.g., todo → in-progress → done)
+- Support task categories/tags
+
+## UI/UX Guidelines
+- Implement responsive design (mobile-first approach)
+- Use loading skeletons instead of spinners when possible
+- Show clear error messages to users
+- Implement optimistic updates for better UX
+- Add keyboard shortcuts for common actions
+- Ensure accessibility (ARIA labels, keyboard navigation, focus management)
+- Use CSS variables for theming
+
+## File Organization (Vite Structure)
+```
+src/
+  components/
+    common/        # Reusable UI components (Button, Input, Modal, etc.)
+    tasks/         # Task-specific components (TaskCard, TaskList, TaskForm, etc.)
+  hooks/           # Custom React hooks (useTasks, useAuth, etc.)
+  services/        # API services (taskService, authService, etc.)
+  utils/           # Utility functions (formatters, validators, etc.)
+  types/           # TypeScript type definitions and interfaces
+  contexts/        # React contexts (AuthContext, ThemeContext, etc.)
+  constants/       # App constants (API endpoints, status values, etc.)
+  assets/          # Images, fonts, etc.
+  styles/          # Global styles, theme files
+App.tsx            # Main app component
+main.tsx           # Entry point
+vite-env.d.ts      # Vite type definitions
+```
+
+## Vite Configuration
+- Configure path aliases in `vite.config.ts`:
+  ```typescript
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  }
+  ```
+- Use Vite plugins for common needs (React, TypeScript, etc.)
+- Configure build optimizations (chunking, minification)
+
+## Testing
+- Write unit tests for utility functions
+- Write component tests using Vitest and React Testing Library
+- Test user interactions, not implementation details
+- Aim for high test coverage on critical paths
+- Use MSW (Mock Service Worker) for API mocking in tests
+
+## Performance
+- Use `React.memo` for expensive components
+- Implement code splitting with `React.lazy` and `Suspense`
+- Optimize images and assets (use Vite's asset handling)
+- Use virtualization for long lists (react-window or react-virtual)
+- Debounce search and filter inputs
+- Leverage Vite's built-in code splitting
+
+## Development
+- Use Vite's dev server for fast development
+- Leverage Vite's plugin ecosystem
+- Use TypeScript for all new files
+- Keep bundle size in check (use Vite's build analyzer if needed)
+
+## Git & Commits
+- Use conventional commit messages
+- Keep commits focused and atomic
+- Write descriptive commit messages
