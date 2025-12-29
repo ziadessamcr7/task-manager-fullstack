@@ -2,7 +2,6 @@ import axios, { AxiosInstance, AxiosError } from 'axios';
 import { AuthResponse, TasksResponse, Task, TaskStatus } from '../types';
 
 // Base URL for the backend API
-// const API_BASE_URL = 'http://localhost:3000';
 
 // Fix: Use 'as string' to avoid type errors when accessing VITE_API_URL
 const API_BASE_URL = (import.meta as any).env.VITE_API_URL as string;
